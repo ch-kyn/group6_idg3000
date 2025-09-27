@@ -32,13 +32,32 @@ Images that are not initially visible on the page should only be loaded when the
 - **FAIL** if any offscreen image loads immediately or lacks the `loading="lazy"` attribute.
 
 ## 7) Exact test steps (reproducible)
-1. Serve demo site locally:
-   ```
+1. Serve demo site locally:```
+Ensure you have node.js installed, then 
+cd demo/broken && npx serve -p 8080
 
-   Ensure you have node.js installed, then 
-   cd demo/broken
-   npx http-server . -p 8000
+   Open a new terminal, and write
+   npx lighthouse http://localhost:8080/  \
+   --output=json \
+   --output-path=demo/broken/lazy.json \
+   --chrome-flags="--headless" \
+   --save-assets \
+   --throttling-method=simulate \
+   --emulated-form-factor=mobile
 
+   Do the same for demo/fixed
+   cd demo/fixed && npx serve -p 8081
+
+   npx lighthouse http://localhost:8081/  \
+   --output=json \
+   --output-path=demo/fixed/lazy.json \
+   --chrome-flags="--headless" \
+   --save-assets \
+   --throttling-method=simulate \
+   --emulated-form-factor=mobile
+
+   Then run
+   cd demo/scripts && node co2.js
    ```
 
 2. 
