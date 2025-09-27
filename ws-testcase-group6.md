@@ -34,11 +34,14 @@ Images that are not initially visible on the page should only be loaded when the
 ## 7) Exact test steps (reproducible)
 1. Serve demo site locally:
    ```
+
+   Ensure you have node.js installed, then 
    cd demo/broken
    npx http-server . -p 8000
+
    ```
 
-2. Do something here.
+2. 
 3. Profit!!!
 
 ## 8) Evidence required
