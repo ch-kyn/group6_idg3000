@@ -32,45 +32,50 @@ Images that are not initially visible on the page should only be loaded when the
 - **FAIL** if any offscreen image loads immediately or lacks the `loading="lazy"` attribute.
 
 ## 7) Exact test steps (reproducible)
-1. Serve demo site locally:```
-Ensure you have node.js installed, then 
-cd demo/broken && npx serve -p 8080
+1. Serve demo site locally:
+   Ensure you have node.js installed, then 
+   ```
+   cd demo/broken && npx serve -p 8080
+   ```
 
-   Open a new terminal, and write
-   npx lighthouse http://localhost:8080/  \
+2. Open a new terminal, and write
+   ```
+   npx lighthouse http://localhost:8080  \
    --output=json \
    --output-path=demo/broken/lazy.json \
    --chrome-flags="--headless" \
    --save-assets \
    --throttling-method=simulate \
    --emulated-form-factor=mobile
+   ```
 
-   Do the same for demo/fixed
+3. Do the same for demo/ (just a different port/output-path)
+   ```
    cd demo/fixed && npx serve -p 8081
 
-   npx lighthouse http://localhost:8081/  \
+   npx lighthouse http://localhost:8081  \
    --output=json \
    --output-path=demo/fixed/lazy.json \
    --chrome-flags="--headless" \
    --save-assets \
    --throttling-method=simulate \
    --emulated-form-factor=mobile
-
-   Then run
-   cd demo/scripts && node co2.js
    ```
 
-2. 
-3. Profit!!!
+4. Then run, but make sure you have downloaded the `@tgwf/co2` library with `npm install @tgwf/co2`
+   ```
+   cd demo/scripts && node co2.js
+   ```
 
 ## 8) Evidence required
 - `demo/broken/index.html`, `demo/fixed/index.html` + image files
 - `demo/README.md` (with run steps)
-- evidence/(insert images here I guess)
 
 ## 9) Automation hints (optional)
-- Use Lighthouse audits to detect large images that are not lazy-loaded and quantify potential savings.
+- Use Lighthouse audits to detect large images that are not lazy-
+loaded and quantify potential savings.
 - Combine network HAR and Lighthouse JSON analysis to programmatically confirm offscreen images load only when required.
+- Use `co2.js`, which calculate emissions and show the difference.
 
 ## 10) Assumptions & notes
 - CO₂ model: SWDM v4 default for all runs.
